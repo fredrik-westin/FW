@@ -24,24 +24,36 @@
       font-weight: 700;
       color: #000;
       text-transform: uppercase;
+    }
 
+    body {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* ⭐ Bilden högst upp med fast marginal */
+    /* Bilden – startar nära toppen, men går att dra runt */
     .top-image {
       width: 140px;
       height: auto;
       object-fit: cover;
-      margin-top: 40px; /* ⭐ alltid samma marginal över */
-      display: block;
+
+      margin-top: 40px;
+
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: grab;
+      touch-action: none; /* bättre drag på mobil */
     }
 
-    /* ⭐ Text-blocket under bilden med fast spacing */
+    .top-image:active {
+      cursor: grabbing;
+    }
+
+    /* Text-blocket under, centrerat */
     .content {
-      margin-top: 30px; /* ⭐ alltid samma avstånd mellan bild och text */
+      margin-top: 140px; /* så att texten börjar en bit ner från toppen */
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -61,10 +73,10 @@
 
 <body>
 
-  <!-- Bild med fast toppmarginal -->
-  <img src="Kram.JPG" alt="FREDRIK WESTIN" class="top-image">
+  <!-- Flyttbar bild -->
+  <img src="Kram.JPG" alt="FREDRIK WESTIN" class="top-image" id="draggable-image">
 
-  <!-- Text med fast marginal från bilden -->
+  <!-- Texten -->
   <div class="content">
     <div>FREDRIK WESTIN</div>
     <div>GRAPHIC DESIGNER</div>
@@ -73,5 +85,71 @@
     <div><a href="https://www.instagram.com/fw.fredrikwestin" target="_blank">INSTAGRAM: FW.FREDRIKWESTIN</a></div>
   </div>
 
+  <script>
+    // Enkel drag-funktion för bild (mus + touch)
+    (function() {
+      const img = document.getElementById('draggable-image');
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+      let initialLeft = 0;
+      let initialTop = 0;
+
+      function getEventPosition(e) {
+        if (e.touches && e.touches.length > 0) {
+          return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        } else {
+          return { x: e.clientX, y: e.clientY };
+        }
+      }
+
+      function onDown(e) {
+        e.preventDefault();
+        isDragging = true;
+
+        const rect = img.getBoundingClientRect();
+        const pos = getEventPosition(e);
+
+        startX = pos.x;
+        startY = pos.y;
+        initialLeft = rect.left;
+        initialTop = rect.top;
+
+        img.style.transition = 'none';
+
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+        document.addEventListener('touchmove', onMove, { passive: false });
+        document.addEventListener('touchend', onUp);
+      }
+
+      function onMove(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+
+        const pos = getEventPosition(e);
+        const dx = pos.x - startX;
+        const dy = pos.y - startY;
+
+        const newLeft = initialLeft + dx;
+        const newTop = initialTop + dy;
+
+        img.style.left = newLeft + 'px';
+        img.style.top = newTop + 'px';
+        img.style.transform = 'translate(0, 0)'; // vi släpper centrerings-translate när man börjar dra
+      }
+
+      function onUp() {
+        isDragging = false;
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+        document.removeEventListener('touchmove', onMove);
+        document.removeEventListener('touchend', onUp);
+      }
+
+      img.addEventListener('mousedown', onDown);
+      img.addEventListener('touchstart', onDown, { passive: false });
+    })();
+  </script>
 </body>
 </html>
