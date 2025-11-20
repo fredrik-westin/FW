@@ -24,33 +24,28 @@
       font-weight: 700;
       color: #000;
       text-transform: uppercase;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    /* ⭐ Bilden i toppen */
+    /* ⭐ Bilden högst upp med fast marginal */
     .top-image {
       width: 140px;
       height: auto;
       object-fit: cover;
-      margin-top: 20px;
+      margin-top: 40px; /* ⭐ alltid samma marginal över */
       display: block;
-      margin-left: auto;
-      margin-right: auto;
     }
 
-    /* ⭐ Text centrerad men förskjuten neråt */
-    .centered-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-
-      /* ⭐ Justera spacing här — lägg till mer / mindre */
-      transform: translate(-50%, calc(-50% + 60px));
-
+    /* ⭐ Text-blocket under bilden med fast spacing */
+    .content {
+      margin-top: 30px; /* ⭐ alltid samma avstånd mellan bild och text */
       text-align: center;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      width: max-content;
     }
 
     a {
@@ -66,11 +61,11 @@
 
 <body>
 
-  <!-- Bild i toppen -->
+  <!-- Bild med fast toppmarginal -->
   <img src="Kram.JPG" alt="FREDRIK WESTIN" class="top-image">
 
-  <!-- Texten — centrerad men med extra spacing uppåt -->
-  <div class="centered-text">
+  <!-- Text med fast marginal från bilden -->
+  <div class="content">
     <div>FREDRIK WESTIN</div>
     <div>GRAPHIC DESIGNER</div>
     <div>STOCKHOLM, SWEDEN</div>
