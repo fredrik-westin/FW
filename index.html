@@ -27,10 +27,10 @@
       overflow: hidden;
     }
 
-    /* ⭐ Texten ligger högst upp, centrerad */
+    /* ⭐ Textblocket ligger högst upp med konstant marginal */
     .header {
       position: absolute;
-      top: 20px; /* justera om du vill upp/ner */
+      top: 40px;              /* ⬅️ Övre marginal */
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -39,14 +39,24 @@
       gap: 6px;
     }
 
-    /* ⭐ Bilden startar centrerad och går att dra runt */
+    /* ⭐ Bilden ligger centrerad — och spacing är lika med top:40px */
     .draggable-image {
-      width: 160px; /* ändra storlek här */
+      width: 160px;
       height: auto;
       position: absolute;
-      top: 50%;
+
+      /* Centrerar bilden + ger 40px marginal över texten */
+      top: calc(40px + 6 * 13px + 40px); 
+      /*
+        Förklaring:
+
+        40px  = marginal över text
+        6 * 13px = höjden på 6 rader text (line-height 13px)
+        40px = lika mycket marginal mellan text och bild
+      */
+
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
       cursor: grab;
       touch-action: none;
     }
@@ -68,7 +78,7 @@
 
 <body>
 
-  <!-- ⭐ TEXT HÖGST UPP -->
+  <!-- ⭐ Textblock med symmetrisk spacing -->
   <div class="header">
     <div>FREDRIK WESTIN</div>
     <div>GRAPHIC DESIGNER</div>
@@ -78,11 +88,11 @@
     <div><a href="https://www.instagram.com/fw.fredrikwestin" target="_blank">INSTAGRAM: FW.FREDRIKWESTIN</a></div>
   </div>
 
-  <!-- ⭐ DRAGGBAR BILD I MITTEN -->
+  <!-- ⭐ Dragbar bild -->
   <img src="Kram.JPG" class="draggable-image" id="draggable-image">
 
   <script>
-    // Dragfunktion för bilden
+    // Dragfunktion (mus + touch)
     (function() {
       const img = document.getElementById('draggable-image');
       let isDragging = false;
