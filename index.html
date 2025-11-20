@@ -27,20 +27,20 @@
       overflow: hidden;
     }
 
-    /* ⭐ Centrera textblocket i övre halvan */
-    .content {
+    /* ⭐ Texten ligger högst upp, centrerad */
+    .header {
       position: absolute;
-      top: 30%; /* flytta upp/ner texten som du vill här */
+      top: 20px; /* justera om du vill upp/ner */
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
       text-align: center;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
-    /* ⭐ Bilden startar i mitten av sidan */
-    .top-image {
+    /* ⭐ Bilden startar centrerad och går att dra runt */
+    .draggable-image {
       width: 160px; /* ändra storlek här */
       height: auto;
       position: absolute;
@@ -51,7 +51,7 @@
       touch-action: none;
     }
 
-    .top-image:active {
+    .draggable-image:active {
       cursor: grabbing;
     }
 
@@ -68,20 +68,21 @@
 
 <body>
 
-  <!-- ⭐ Text ovanför — centrerad -->
-  <div class="content">
+  <!-- ⭐ TEXT HÖGST UPP -->
+  <div class="header">
     <div>FREDRIK WESTIN</div>
     <div>GRAPHIC DESIGNER</div>
     <div>STOCKHOLM, SWEDEN</div>
+    <div>EMAIL FOR PDF PORTFOLIO</div>
     <div><a href="mailto:FW.FREDRIKWESTIN@GMAIL.COM">FW.FREDRIKWESTIN@GMAIL.COM</a></div>
     <div><a href="https://www.instagram.com/fw.fredrikwestin" target="_blank">INSTAGRAM: FW.FREDRIKWESTIN</a></div>
   </div>
 
-  <!-- ⭐ Dra runt bilden fritt — startar i mitten -->
-  <img src="Kram.JPG" class="top-image" id="draggable-image">
+  <!-- ⭐ DRAGGBAR BILD I MITTEN -->
+  <img src="Kram.JPG" class="draggable-image" id="draggable-image">
 
   <script>
-    // Drag funktion
+    // Dragfunktion för bilden
     (function() {
       const img = document.getElementById('draggable-image');
       let isDragging = false;
@@ -116,4 +117,27 @@
         if (!isDragging) return;
         e.preventDefault();
 
-        co
+        const pos = getPos(e);
+        const dx = pos.x - startX;
+        const dy = pos.y - startY;
+
+        img.style.left = imgX + dx + "px";
+        img.style.top = imgY + dy + "px";
+        img.style.transform = "translate(0, 0)";
+      }
+
+      function up() {
+        isDragging = false;
+        document.removeEventListener("mousemove", move);
+        document.removeEventListener("mouseup", up);
+        document.removeEventListener("touchmove", move);
+        document.removeEventListener("touchend", up);
+      }
+
+      img.addEventListener("mousedown", down);
+      img.addEventListener("touchstart", down, { passive: false });
+    })();
+  </script>
+
+</body>
+</html>
