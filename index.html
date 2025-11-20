@@ -26,7 +26,7 @@
       text-transform: uppercase;
     }
 
-    /* ⭐ Bilden högst upp */
+    /* ⭐ Bilden i toppen */
     .top-image {
       width: 140px;
       height: auto;
@@ -37,12 +37,15 @@
       margin-right: auto;
     }
 
-    /* ⭐ Texten som ALLTID ligger centrerad */
+    /* ⭐ Text centrerad men förskjuten neråt */
     .centered-text {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+
+      /* ⭐ Justera spacing här — lägg till mer / mindre */
+      transform: translate(-50%, calc(-50% + 60px));
+
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -63,10 +66,10 @@
 
 <body>
 
-  <!-- ⭐ Bilden ligger i toppen -->
+  <!-- Bild i toppen -->
   <img src="Kram.JPG" alt="FREDRIK WESTIN" class="top-image">
 
-  <!-- ⭐ Texten ligger i mitten av sidan, alltid -->
+  <!-- Texten — centrerad men med extra spacing uppåt -->
   <div class="centered-text">
     <div>FREDRIK WESTIN</div>
     <div>GRAPHIC DESIGNER</div>
