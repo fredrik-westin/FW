@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    /* HELVETICA NOW TEXT BOLD */
     @font-face {
       font-family: "Helvetica Now";
       src: url("HelveticaNowText-Bold.woff2") format("woff2");
@@ -15,42 +14,42 @@
     }
 
     html, body {
-      height: 100%;
       margin: 0;
       padding: 0;
-      overflow: hidden;
+      height: 100%;
       background: #ffffff;
-      font-family: "Helvetica Now", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-family: "Helvetica Now", sans-serif;
       font-size: 12px;
       line-height: 13px;
-      font-weight: 700; /* Bold */
+      font-weight: 700;
       color: #000;
-      text-transform: uppercase; /* säkerställer versaler */
-    }
-
-    .container {
-      height: 100%;
+      text-transform: uppercase;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-      gap: 12px;
     }
 
-    .profile-image {
-      width: 140px;
+    /* Bilden */
+    .top-image {
+      width: 140px; /* ändra storlek här om du vill */
       height: auto;
+      margin-top: 20px; /* ⭐ marginal i överkant */
       object-fit: cover;
     }
 
+    /* Texten under */
+    .content {
+      margin-top: 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Länkar utan understrykning */
     a {
       color: #000;
       text-decoration: none;
-      border-bottom: 1px solid #000;
-      padding-bottom: 1px;
-      font-weight: 700;
     }
 
     a:hover {
@@ -60,17 +59,18 @@
 </head>
 
 <body>
-  <div class="container">
 
-    <!-- DIN BILD -->
-    <img src="Kram.JPG" alt="FREDRIK WESTIN" class="profile-image">
+  <!-- ⭐ BILD HÖGST UPP -->
+  <img src="Kram.JPG" alt="FREDRIK WESTIN" class="top-image">
 
+  <!-- ⭐ CENTRERAD TEXT UNDER -->
+  <div class="content">
     <div>FREDRIK WESTIN</div>
     <div>GRAPHIC DESIGNER</div>
     <div>STOCKHOLM, SWEDEN</div>
     <div><a href="mailto:FW.FREDRIKWESTIN@GMAIL.COM">FW.FREDRIKWESTIN@GMAIL.COM</a></div>
     <div><a href="https://www.instagram.com/fw.fredrikwestin" target="_blank">INSTAGRAM: FW.FREDRIKWESTIN</a></div>
-
   </div>
+
 </body>
 </html>
