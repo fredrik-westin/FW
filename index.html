@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    /* HELVETICA NOW MEDIUM */
     @font-face {
       font-family: "Helvetica Now";
       src: url("HelveticaNowText-Medium.woff2") format("woff2");
@@ -35,7 +34,13 @@
       justify-content: center;
       text-align: center;
       padding: 20px;
-      gap: 8px;
+      gap: 12px;
+    }
+
+    .profile-image {
+      width: 140px;   /* Ändra storlek här */
+      height: auto;
+      object-fit: cover;
     }
 
     a {
@@ -54,12 +59,16 @@
 
 <body>
   <div class="container">
+
+    <!-- ⭐ DIN ENDA BILD -->
+    <img src="bild.jpg" alt="FREDRIK WESTIN" class="profile-image">
+
     <div>FREDRIK WESTIN</div>
     <div>GRAPHIC DESIGNER</div>
     <div>STOCKHOLM, SWEDEN</div>
-    <div>STOCKHOLM, SWEDEN</div><div><a href="mailto:FW.FREDRIKWESTIN@GMAIL.COM">FW.FREDRIKWESTIN@GMAIL.COM</a></div>
+    <div><a href="mailto:FW.FREDRIKWESTIN@GMAIL.COM">FW.FREDRIKWESTIN@GMAIL.COM</a></div>
     <div><a href="https://www.instagram.com/fw.fredrikwestin" target="_blank">INSTAGRAM: FW.FREDRIKWESTIN</a></div>
+
   </div>
 </body>
 </html>
-
